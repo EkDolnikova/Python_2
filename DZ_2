@@ -1,20 +1,28 @@
-# Напишите код, который запрашивает число и сообщает является ли оно простым или составным.
-# Используйте правило для проверки: “Число является простым, если делится нацело только на единицу и на себя”.
-# Сделайте ограничение на ввод отрицательных чисел и чисел больше 100 тысяч.
+# Напишите программу, которая принимает две строки вида “a/b” - дробь с числителем и знаменателем.
+# Программа должна возвращать сумму и произведение* дробей. Для проверки своего кода используйте модуль fractions.
 
-MIN_NUM = 0
-MAX_NUM = 100000
-divider = 2
-count = 0
-num = int(input("Введите число: "))
-if num < MIN_NUM or num > MAX_NUM:
-    print("Введено недопустимое число. Допустимы числа от 0 до 100000")
-elif num == 0 or num == 1:
-    print("Число не является ни простым, ни составным")
-else:
-    for i in range(divider, num):
-        if num % i == 0:
-            print("Число составное")
-            break
-        else:
-            print("Число простое")
+
+import fractions
+
+fract_1 = input("Введите первую дробь в формате a/b: ").split("/")
+fract_2 = input("Введите вторую дробь в формате c/d: ").split("/")
+
+#sum_of_fractions
+common_denominator = int(fract_1[1]) * int(fract_2[1])
+a = int(fract_1[0]) * common_denominator // int(fract_1[1]) + int(fract_2[0]) * common_denominator // int(fract_2[1])
+sum_of_fractions = f"{a}/{common_denominator}"
+
+#product_of_fractions
+numer = int(fract_1[0]) * int(fract_2[0])
+denom = int(fract_1[1]) * int(fract_2[1])
+product_of_fractions = f"{numer}/{denom}"
+
+print(f"Результат сложение дробей: {sum_of_fractions}")
+print(f"Результат произведение дробей: {product_of_fractions}")
+
+
+print("\nПроверка при помощи <fractions>")
+f1 = fractions.Fraction(int(fract_1[0]), int(fract_1[1]))
+f2 = fractions.Fraction(int(fract_2[0]), int(fract_2[1]))
+print(f"сложение = {f1 + f2}")
+print(f"произведение = {f1 * f2}")
